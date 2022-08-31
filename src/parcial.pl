@@ -157,12 +157,3 @@ debeCumplir(Persona, Objetivo, Proyecto):-
 
 
 
-
-%agregado para pruebas
-/*
-indispensable(chrome, almejas).
-puedeIniciarse(almejas).*/
-
-
-
-

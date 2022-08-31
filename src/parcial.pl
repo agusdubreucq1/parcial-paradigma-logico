@@ -24,11 +24,11 @@ prerrequisito(algas, hidroxidodeSodio).
 prerrequisito(hidroxidodeSodio, jabon).
 prerrequisito(grasa, jabon).
 
-prerrequisito(almejas,algas).
 
 %conseguido(Objetivo)
 conseguido(almejas).
 conseguido(algas).
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -56,6 +56,7 @@ puedeTrabajar(Persona, artesania(Dificultad)):-
 puedeTrabajar(suika, material(playa)).
 puedeTrabajar(suika, material(bosque)).
 puedeTrabajar(suika, quimica([mezclarIngredientes])).
+
     
 
 %% Punto 2
@@ -157,7 +158,10 @@ debeCumplir(Persona, Objetivo, Proyecto):-
 
 
 
-
+%agregado para pruebas
+/*
+indispensable(chrome, almejas).
+puedeIniciarse(almejas).*/
 
 
 

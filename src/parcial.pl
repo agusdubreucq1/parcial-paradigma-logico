@@ -110,5 +110,27 @@ objetivoPendiente(Proyecto, ObjetivoPendiente):-
     objetivo(Proyecto, ObjetivoPendiente,_),
     not(conseguido(ObjetivoPendiente)).
 
+% punto 6
+
+critico(Objetivo, Proyecto):-
+    objetivo(Proyecto, Objetivo,_),
+    bloqueaAvance(Objetivo, ObjetivoBloqueado),
+    objetivoCostoso(ObjetivoBloqueado).
+
+objetivoCostoso(Objetivo):-
+    tiempoObjetivo(Objetivo, Tiempo),
+    Tiempo > 5.
+
+bloqueaAvance(Objetivo, ObjetivoBloqueado):-
+    prerrequisito(Objetivo, ObjetivoBloqueado).
+bloqueaAvance(Objetivo, ObjetivoBloqueado):-
+    prerrequisito(OtroObjetivo, ObjetivoBloqueado),
+    bloqueaAvance(Objetivo, OtroObjetivo).
+
+%punto 7
+
+
+
+
 
 

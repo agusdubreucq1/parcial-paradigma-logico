@@ -24,6 +24,8 @@ prerrequisito(algas, hidroxidodeSodio).
 prerrequisito(hidroxidodeSodio, jabon).
 prerrequisito(grasa, jabon).
 
+prerrequisito(almejas,algas).
+
 %conseguido(Objetivo)
 conseguido(almejas).
 conseguido(algas).
@@ -51,6 +53,10 @@ puedeTrabajar(senku, artesania(Dificultad)):-
 puedeTrabajar(Persona, artesania(Dificultad)):-
     sonDelReino(Persona),
     Dificultad < 3.
+puedeTrabajar(suika, material(playa)).
+puedeTrabajar(suika, material(bosque)).
+puedeTrabajar(suika, quimica([mezclarIngredientes])).
+    
 
 %% Punto 2
 
@@ -77,7 +83,7 @@ puedeIniciarse(Objetivo):-
 
 %%punto 5
 
-cuantoFalta(Proyecto, Tiempo):-
+tiempoProyecto(Proyecto, Tiempo):-
     objetivo(Proyecto,_,_),
     findall(TiempoObjetivo, (objetivoPendiente(Proyecto,ObjetivoPendiente),tiempoObjetivo(ObjetivoPendiente, TiempoObjetivo)),ListaTiempo),
     sumlist(ListaTiempo, Tiempo).
@@ -128,6 +134,28 @@ bloqueaAvance(Objetivo, ObjetivoBloqueado):-
     bloqueaAvance(Objetivo, OtroObjetivo).
 
 %punto 7
+
+convieneTrabajarSobre(Persona, Objetivo, Proyecto):-
+    puedeIniciarse(Objetivo),
+    objetivo(Proyecto,Objetivo, TipoDeObjetivo),
+    puedeTrabajar(Persona, TipoDeObjetivo),
+    debeCumplir(Persona, Objetivo, Proyecto).
+
+debeCumplir(Persona, Objetivo, Proyecto):-
+    indispensable(Persona, Objetivo),
+    critico(Objetivo, Proyecto).
+
+debeCumplir(_, Objetivo, Proyecto):-
+    tiempoObjetivo(Objetivo,TiempoObjetivo),
+    tiempoProyecto(Proyecto, TiempoProyecto),
+    TiempoObjetivo > (TiempoProyecto/2).
+debeCumplir(Persona, Objetivo, Proyecto):-
+    sonDelReino(Persona),
+    objetivo(Proyecto, Objetivo,_),
+    forall((objetivo(Proyecto, OtroObjetivo,_),puedeIniciarse(OtroObjetivo),OtroObjetivo\=Objetivo), (puedeTrabajar(OtraPersona, OtroObjetivo),OtraPersona\=Persona)).
+
+
+
 
 
 
